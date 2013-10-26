@@ -43,9 +43,8 @@ def main():
     print "Decoded"
 
     pipeline.set_state(gst.STATE_PLAYING)
-    print "Pipeline state set"
 
 
 main()
 gtk.gdk.threads_init()
-gtk.main() 
+gtk.main()  
