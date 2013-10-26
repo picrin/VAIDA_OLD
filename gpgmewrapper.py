@@ -48,7 +48,7 @@ def add_untrusted_key():
 
 #print verify_vaida("Honey_Sample_G.avi.sig", "").
 #print gpg.export_keys(u'B137CC291B3AE62A')
-generate_gpg_key()
+#generate_gpg_key()
 
 print dir(gpg.import_keys("""-----BEGIN PGP PUBLIC KEY BLOCK-----
 Version: GnuPG v1.4.12 (GNU/Linux)

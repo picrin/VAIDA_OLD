@@ -4,7 +4,6 @@ import sys, os, time, math
 pygst.require("0.10")
 import gst
 import gobject
-
 #This class runs the code it contains in another thread using QThread
 class Player(QtCore.QThread):
      def __init__(self):
