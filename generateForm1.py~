@@ -1,0 +1,10 @@
+import sys
+from PyQt4.QtGui import QApplication, QDialog
+from generateForm1Layout import *
+
+class GenerateForm1 (object):    
+    def __init__(self):
+        self.window = QDialog()
+        self.ui = Ui_Generate1()
+        self.ui.setupWindow(window)
+        self.window.show()
