@@ -18,7 +18,7 @@
   <property name="windowTitle">
    <string>VAIDA - Choose Key</string>
   </property>
-  <widget class="QLabel" name="ExistingPGPLabel">
+  <widget class="QLabel" name="existingPGPLabel">
    <property name="geometry">
     <rect>
      <x>0</x>
@@ -42,7 +42,7 @@
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="loadKeyButton">
    <property name="geometry">
     <rect>
      <x>180</x>
@@ -60,7 +60,7 @@
     <string>Load Key</string>
    </property>
   </widget>
-  <widget class="QLabel" name="ExistingPGPLabel_2">
+  <widget class="QLabel" name="newPGPLabel">
    <property name="geometry">
     <rect>
      <x>0</x>
@@ -84,7 +84,7 @@
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QLabel" name="label">
+  <widget class="QLabel" name="nameLabel">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -102,7 +102,7 @@
     <string>Your name:</string>
    </property>
   </widget>
-  <widget class="QPlainTextEdit" name="plainTextEdit">
+  <widget class="QPlainTextEdit" name="nameTextEdit">
    <property name="geometry">
     <rect>
      <x>190</x>
@@ -115,7 +115,7 @@
     <bool>true</bool>
    </property>
   </widget>
-  <widget class="QLabel" name="label_2">
+  <widget class="QLabel" name="emailLabel">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -133,7 +133,7 @@
     <string>Your email address:</string>
    </property>
   </widget>
-  <widget class="QPlainTextEdit" name="plainTextEdit_2">
+  <widget class="QPlainTextEdit" name="emailTextEdit">
    <property name="geometry">
     <rect>
      <x>190</x>
@@ -146,7 +146,7 @@
     <bool>true</bool>
    </property>
   </widget>
-  <widget class="QLabel" name="label_4">
+  <widget class="QLabel" name="passphraseLabel">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -164,7 +164,7 @@
     <string>Passphrase</string>
    </property>
   </widget>
-  <widget class="QPlainTextEdit" name="plainTextEdit_4">
+  <widget class="QPlainTextEdit" name="passphraseTextEdit">
    <property name="geometry">
     <rect>
      <x>190</x>
@@ -177,7 +177,7 @@
     <bool>true</bool>
    </property>
   </widget>
-  <widget class="QLabel" name="label_5">
+  <widget class="QLabel" name="passphraseTipsTextEdit">
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -216,7 +216,7 @@ For example: &quot;Dirty loondry! Boundry. Stash/&quot;</string>
     <string>Generate Key</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_3">
+  <widget class="QLabel" name="passphraseLengthLabel">
    <property name="geometry">
     <rect>
      <x>560</x>

@@ -1,13 +1,34 @@
 import sys
 from PyQt4.QtGui import QApplication, QDialog
 from GenerateForm1Layout import *
+from PrivateKeySelector import *
 
-def showGenerateForm1(app):
-    #Set up window
-    window = QDialog()
-    ui = Ui_GenerateForm1Dialog()
-    ui.setupUi(window)
-    window.show()
+class GenerateForm1 (QDialog):
     
-    # Add GenerateForm1 window to openWindows
-    app.openWindows = app.openWindows + [window]
+    def passphraseChanged(self):
+        print ("Passphrase changed signal received!")
+        self.ui.passphraseLengthLabel.setText(str(len(self.ui.passphraseTextEdit.toPlainText())))
+    
+    def loadKeyClicked(self):
+        newForm = PrivateKeySelector()
+        self.window.close()
+        newForm._exec()
+    
+    def __init__(self, app):
+        super(QDialog, self).__init__()
+        
+        #Set up window
+        self.window = QDialog()
+        self.ui = Ui_GenerateForm1Dialog()
+        self.ui.setupUi(self.window)
+        
+        # Set up connections
+        self.ui.passphraseTextEdit.textChanged.connect(self.passphraseChanged)
+        self.ui.loadKeyButton.clicked.connect(self.loadKeyClicked)
+        
+        self.window.show()
+        
+        # Add GenerateForm1 window to openWindows
+        app.openWindows = app.openWindows + [self.window]
+
+

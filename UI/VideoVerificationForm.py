@@ -4,12 +4,10 @@ from PyQt4.QtGui import QApplication, QDialog, QMessageBox
 from PyQt4.phonon import Phonon
 from VideoVerificationFormLayout import *
 
-def showVideoVerificationForm(app, videoPath):
-    VideoVerificationForm(app, videoPath)
-
 class VideoVerificationForm (QDialog) :
         
     def __init__(self, app, videoPath):
+        super(QDialog, self).__init__()
         self.window = QDialog()
         self.ui = Ui_VideoVerificationDialog()
         self.ui.setupUi(self.window)
