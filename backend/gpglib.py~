@@ -55,7 +55,7 @@ def sign_video(video_filepath, passphrase, keyid):
 def create_vaida(video_filepath, passphrase, keyid):
     #TODO slashes -> windows
     binary = sign_video(video_filepath, passphrase, keyid)
-    with tarfile.open(name=video_filepath + ".vaida.tar", mode='w', fileobj=None, bufsize=10240) as tar:
+    with tarfile.open(name=hvideo_filepath.split("/")[-1] + ".vaida.tar", mode='w', fileobj=None, bufsize=10240) as tar:
         gpg = gnupg.GPG(gnupghome = true_gpg_path)
         armored_key = gpg.export_keys(keyid)
         with open ("pubkey", "wb") as pubkey:
@@ -91,12 +91,12 @@ def add_pub_keyring():
     print trusted.stderr
     if os.path.isdir(tmp_home):
         shutil.rmtree(tmp_home)
+    return "success!"
 
-
-create_vaida("/home/picrin/programming/VAIDA/Honey_Sample_G.avi", "dirty loondry boundry. stash/", u"D98029C596F20E5D")
-#print verify_vaida("/home/picrin/programming/VAIDA/Honey_Sample_G.avi.vaida.tar")
+#create_vaida("/home/picrin/programming/VAIDA/Honey_Sample_G.avi", "dirty loondry boundry. stash/", u"D98029C596F20E5D")
+print verify_vaida("/home/picrin/programming/VAIDA/backend/Honey_Sample_G.avi.vaida.tar")
 #add_pub_keyring()
-print public_keys_details()
+#print public_keys_details()
 #print private_keys_details()
 #generate_gpg_key("Adam Kurkiewicz (do not trust)", "picrin (do not trust)", "adam@kurkiewicz.pl (do not trust)", "dirty loondry boundry. stash/")
 

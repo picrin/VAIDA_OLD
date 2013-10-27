@@ -1,7 +1,8 @@
 import sys
 from PyQt4.QtGui import QApplication, QDialog
 from PrivateKeySelectorDialog import *
-#from gpglib import *
+from PyQt4.QtGui import QListWidgetItem
+from gpglib import *
 
 def showPrivateKeySelector(app):
     PrivateKeySelector(app)
@@ -13,6 +14,13 @@ class PrivateKeySelector (QDialog):
         self.window = QDialog()
         self.ui = Ui_PrivateKeySelectorDialog()
         self.ui.setupUi(self.window)
+        
+        keysDict = private_keys_users()
+        
+        for key in keysDict.keys():
+            #item = QListWidgetItem(key)
+            #self.ui.keyListWidget.insertItem(item)
+            self.ui.keyListWidget.addItem(key)
         
         #self.ui.privateKeyList = private_keys_users().keys()
         
@@ -26,4 +34,4 @@ class PrivateKeySelector (QDialog):
         self.window.show()
         
         # Add GenerateForm1 window to openWindows
-        app.openWindows = app.openWindows + [self.window]
+        

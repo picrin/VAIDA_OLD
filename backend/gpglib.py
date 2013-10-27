@@ -91,12 +91,12 @@ def add_pub_keyring():
     print trusted.stderr
     if os.path.isdir(tmp_home):
         shutil.rmtree(tmp_home)
+    return "success!"
 
-
-create_vaida("/home/picrin/programming/VAIDA/Honey_Sample_G.avi", "dirty loondry boundry. stash/", u"D98029C596F20E5D")
-#print verify_vaida("/home/picrin/programming/VAIDA/Honey_Sample_G.avi.vaida.tar")
+#create_vaida("/home/picrin/programming/VAIDA/Honey_Sample_G.avi", "dirty loondry boundry. stash/", u"D98029C596F20E5D")
+#print verify_vaida("/home/picrin/programming/VAIDA/backend/Honey_Sample_G.avi.vaida.tar")
 #add_pub_keyring()
-print public_keys_details()
+#print public_keys_details()
 #print private_keys_details()
-#generate_gpg_key("Adam Kurkiewicz (do not trust)", "picrin (do not trust)", "adam@kurkiewicz.pl (do not trust)", "dirty loondry boundry. stash/")
+generate_gpg_key("Hugh McGrade (do not trust)", "hmg (do not trust)", "hugh@mcgrade.ac.uk (do not trust)", "dirty loondry boundry. stash/")
 

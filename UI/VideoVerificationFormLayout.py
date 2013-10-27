@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'VideoVerificationFormLayout.ui'
 #
-# Created: Sun Oct 27 15:14:44 2013
-#      by: PyQt4 UI code generator 4.10.3
+# Created: Sun Oct 27 16:06:57 2013
+#      by: PyQt4 UI code generator 4.10
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -33,7 +33,7 @@ class Ui_VideoVerificationDialog(object):
         self.label = QtGui.QLabel(VideoVerificationDialog)
         self.label.setGeometry(QtCore.QRect(30, 450, 301, 31))
         font = QtGui.QFont()
-        font.setPointSize(14)
+        font.setPointSize(10)
         font.setBold(True)
         font.setItalic(False)
         font.setWeight(75)
@@ -84,10 +84,10 @@ class Ui_VideoVerificationDialog(object):
 
     def retranslateUi(self, VideoVerificationDialog):
         VideoVerificationDialog.setWindowTitle(_translate("VideoVerificationDialog", "VAIDA - Verify Video", None))
-        self.label.setText(_translate("VideoVerificationDialog", "Key signature: <signature>", None))
-        self.label_2.setText(_translate("VideoVerificationDialog", "Key expiration: <expiration>", None))
-        self.checkBox.setText(_translate("VideoVerificationDialog", "Does this look like <name>?", None))
-        self.checkBox_2.setText(_translate("VideoVerificationDialog", "Does this sound like <name>?", None))
+        self.label.setText(_translate("VideoVerificationDialog", "Key fingerprint: 0C8E5995CD1770E5936D288ED98029C596F20E5D", None))
+        self.label_2.setText(_translate("VideoVerificationDialog", "Key expiration: 27 October 2014", None))
+        self.checkBox.setText(_translate("VideoVerificationDialog", "Does this look like Adam?", None))
+        self.checkBox_2.setText(_translate("VideoVerificationDialog", "Does this sound like Adam?", None))
         self.checkBox_3.setText(_translate("VideoVerificationDialog", "Do the key fingerprints match?", None))
         self.checkBox_4.setText(_translate("VideoVerificationDialog", "Do the key expiration dates match?", None))
 

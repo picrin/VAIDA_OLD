@@ -21,7 +21,3 @@ class KeySavedForm (QDialog):
         
         # Add GenerateForm1 window to openWindows
         #app.openWindows = app.openWindows + [self.window]
-        
-app = QApplication([])
-form = KeySavedForm(app)
-form._exec()
