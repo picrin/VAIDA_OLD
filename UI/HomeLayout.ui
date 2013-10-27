@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Home</class>
- <widget class="QDialog" name="Home">
+ <class>HomeDialog</class>
+ <widget class="QDialog" name="HomeDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>VAIDA</string>
   </property>
   <widget class="QWidget" name="horizontalLayoutWidget">
    <property name="geometry">
@@ -104,7 +104,7 @@
    <property name="geometry">
     <rect>
      <x>290</x>
-     <y>30</y>
+     <y>20</y>
      <width>201</width>
      <height>111</height>
     </rect>
