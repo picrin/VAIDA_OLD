@@ -17,7 +17,7 @@ class VideoVerificationForm (QDialog) :
         self.media = Phonon.MediaObject()
         self.media.setCurrentSource(self.source)
         self.video = Phonon.VideoWidget(self.ui.videoPlayerWidget)
-        self.video.setMinimumSize(400, 400)
+        self.video.setMinimumSize(600, 600)
         
         # Scale mode - 0 = do not scale, 1 = scale and crop
         self.video.setScaleMode(Phonon.VideoWidget.ScaleMode(1))

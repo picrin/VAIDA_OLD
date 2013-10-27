@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'VideoVerificationFormLayout.ui'
 #
-# Created: Sun Oct 27 14:36:15 2013
+# Created: Sun Oct 27 15:14:44 2013
 #      by: PyQt4 UI code generator 4.10.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -26,12 +26,12 @@ except AttributeError:
 class Ui_VideoVerificationDialog(object):
     def setupUi(self, VideoVerificationDialog):
         VideoVerificationDialog.setObjectName(_fromUtf8("VideoVerificationDialog"))
-        VideoVerificationDialog.resize(694, 360)
+        VideoVerificationDialog.resize(895, 499)
         self.videoPlayerWidget = QtGui.QWidget(VideoVerificationDialog)
-        self.videoPlayerWidget.setGeometry(QtCore.QRect(20, 10, 301, 261))
+        self.videoPlayerWidget.setGeometry(QtCore.QRect(20, 10, 491, 431))
         self.videoPlayerWidget.setObjectName(_fromUtf8("videoPlayerWidget"))
         self.label = QtGui.QLabel(VideoVerificationDialog)
-        self.label.setGeometry(QtCore.QRect(20, 280, 301, 31))
+        self.label.setGeometry(QtCore.QRect(30, 450, 301, 31))
         font = QtGui.QFont()
         font.setPointSize(14)
         font.setBold(True)
@@ -40,7 +40,7 @@ class Ui_VideoVerificationDialog(object):
         self.label.setFont(font)
         self.label.setObjectName(_fromUtf8("label"))
         self.label_2 = QtGui.QLabel(VideoVerificationDialog)
-        self.label_2.setGeometry(QtCore.QRect(20, 310, 301, 31))
+        self.label_2.setGeometry(QtCore.QRect(560, 450, 301, 31))
         font = QtGui.QFont()
         font.setPointSize(14)
         font.setBold(True)
@@ -49,7 +49,7 @@ class Ui_VideoVerificationDialog(object):
         self.label_2.setFont(font)
         self.label_2.setObjectName(_fromUtf8("label_2"))
         self.widget = QtGui.QWidget(VideoVerificationDialog)
-        self.widget.setGeometry(QtCore.QRect(330, -20, 351, 371))
+        self.widget.setGeometry(QtCore.QRect(530, 0, 351, 441))
         self.widget.setObjectName(_fromUtf8("widget"))
         self.verticalLayout = QtGui.QVBoxLayout(self.widget)
         self.verticalLayout.setContentsMargins(-1, 0, -1, 0)
