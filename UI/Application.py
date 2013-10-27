@@ -33,9 +33,10 @@ class VAIDAApp (QApplication) :
         self.ui.setupUi(self.window)
         
         # Add button connections and last window closed kills app
-        self.connect(self.ui.createButton, QtCore.SIGNAL("clicked()"), self.onCreateButtonClicked)
-        self.connect(self.ui.verifyButton, QtCore.SIGNAL("clicked()"), self.onVerifyButtonClicked)
-        self.connect(self, QtCore.SIGNAL("lastWindowClosed()"), self.closeApp)
+        self.ui.createButton.clicked.connect(self.onCreateButtonClicked)
+        self.ui.verifyButton.clicked.connect(self.onVerifyButtonClicked)
+        self.lastWindowClosed.connect(self.closeApp)
+        #self.connect(self, QtCore.SIGNAL("lastWindowClosed()"), self.closeApp)
         
         self.window.show()
         

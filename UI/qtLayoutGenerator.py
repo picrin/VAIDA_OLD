@@ -1,7 +1,7 @@
 from PyQt4 import uic
 import sys
 
-files = [ "HomeLayout", "GenerateForm1Layout", "VideoVerificationFormLayout" ]
+files = [ "HomeLayout", "GenerateForm1Layout", "VideoVerificationFormLayout", "PrivateKeySelectorDialog" ]
 
 def generate(fileName):
     f = open(fileName + ".py", "w")
@@ -18,3 +18,4 @@ if commandArg == "all":
 else:
     generate(commandArg)
 
+print("Generated")
