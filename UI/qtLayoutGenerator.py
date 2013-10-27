@@ -1,7 +1,7 @@
 from PyQt4 import uic
 import sys
 
-files = [ "HomeLayout", "GenerateForm1Layout", "VideoVerificationFormLayout", "PrivateKeySelectorDialog" ]
+files = [ "HomeLayout", "GenerateForm1Layout", "VideoVerificationFormLayout", "PrivateKeySelectorDialog", "KeySavedFormLayout", "MakeVideoFormLayout", "ExportFormLayout" ]
 
 def generate(fileName):
     f = open(fileName + ".py", "w")

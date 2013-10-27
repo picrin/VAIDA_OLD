@@ -29,7 +29,7 @@ class VideoVerificationForm (QDialog) :
         self.window.show()
         
         # Add VideoVerificationForm window to openWindows list
-        app.openWindows = app.openWindows + [self]
+        #app.openWindows = app.openWindows + [self]
         
         self.media.play()
 			

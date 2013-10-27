@@ -1,7 +1,7 @@
 import sys
 from PyQt4.QtGui import QApplication, QDialog
 from PrivateKeySelectorDialog import *
-from gpglib import *
+#from gpglib import *
 
 def showPrivateKeySelector(app):
     PrivateKeySelector(app)
@@ -14,7 +14,7 @@ class PrivateKeySelector (QDialog):
         self.ui = Ui_PrivateKeySelectorDialog()
         self.ui.setupUi(self.window)
         
-        self.ui.privateKeyList = private_keys_users().keys()
+        #self.ui.privateKeyList = private_keys_users().keys()
         
         #self.ui.passphraseTextEdit.textChanged.connect(self.passphraseChanged)
         #self.ui.passphraseTextEdit.textChanged.emit()

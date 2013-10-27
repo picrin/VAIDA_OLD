@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Choose an existing private key</string>
+   <string>Choose an Existing Private Key</string>
   </property>
   <widget class="QListWidget" name="keyListWidget">
    <property name="geometry">
@@ -21,21 +21,6 @@
      <width>381</width>
      <height>221</height>
     </rect>
-   </property>
-  </widget>
-  <widget class="QPlainTextEdit" name="passphraseTextEdit">
-   <property name="geometry">
-    <rect>
-     <x>130</x>
-     <y>240</y>
-     <width>261</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>14</pointsize>
-    </font>
    </property>
   </widget>
   <widget class="QLabel" name="passphraseLabel">
@@ -72,6 +57,21 @@
    </property>
    <property name="text">
     <string>Select Key</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="lineEdit">
+   <property name="geometry">
+    <rect>
+     <x>130</x>
+     <y>239</y>
+     <width>251</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>14</pointsize>
+    </font>
    </property>
   </widget>
  </widget>

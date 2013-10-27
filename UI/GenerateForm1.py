@@ -6,16 +6,16 @@ from PrivateKeySelector import *
 class GenerateForm1 (QDialog):
     
     def passphraseChanged(self):
-        print ("Passphrase changed signal received!")
         self.ui.passphraseLengthLabel.setText(str(len(self.ui.passphraseTextEdit.toPlainText())))
     
     def loadKeyClicked(self):
-        newForm = PrivateKeySelector()
+        newForm = PrivateKeySelector(self.app)
         self.window.close()
         newForm._exec()
     
     def __init__(self, app):
         super(QDialog, self).__init__()
+        self.app = app
         
         #Set up window
         self.window = QDialog()
@@ -29,6 +29,6 @@ class GenerateForm1 (QDialog):
         self.window.show()
         
         # Add GenerateForm1 window to openWindows
-        app.openWindows = app.openWindows + [self.window]
+        #app.openWindows = app.openWindows + [self.window]
 
 
