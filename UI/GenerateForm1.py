@@ -2,11 +2,12 @@ import sys
 from PyQt4.QtGui import QApplication, QDialog
 from GenerateForm1Layout import *
 
-def showGenerateForm1():
-    print "Showing Form1"
-    app = QApplication(sys.argv)
+def showGenerateForm1(app):
+    #Set up window
     window = QDialog()
-    ui = Ui_GenerateForm1()
+    ui = Ui_GenerateForm1Dialog()
     ui.setupUi(window)
     window.show()
-    sys.exit(app.exec_())
+    
+    # Add GenerateForm1 window to openWindows
+    app.openWindows = app.openWindows + [window]
