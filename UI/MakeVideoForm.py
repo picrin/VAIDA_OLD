@@ -13,7 +13,7 @@ class GenerateForm1 (QDialog):
         self.window.close()
         newForm._exec()
     
-    def __init__(self, app):
+    def __init__(self, app, passphrase, keyID):
         super(QDialog, self).__init__()
         self.app = app
         

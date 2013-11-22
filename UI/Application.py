@@ -19,8 +19,8 @@ class VAIDAApp (QApplication) :
     def onVerifyButtonClicked(self):
         # Verify
         homeDir = expanduser("~")
-        fname = QtGui.QFileDialog.getOpenFileName(caption="Choose a VAIDA file", directory=homeDir)
-        form = VideoVerificationForm(self, videoPath=fname)
+        fname = str(QtGui.QFileDialog.getOpenFileName(caption="Choose a VAIDA file", directory=homeDir))
+        form = VideoVerificationForm(self, vaidaPath=fname)
         self.window.close()
         form._exec()
 

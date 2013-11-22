@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'GenerateForm1Layout.ui'
 #
-# Created: Sun Oct 27 16:06:57 2013
-#      by: PyQt4 UI code generator 4.10
+# Created: Wed Nov 20 15:07:30 2013
+#      by: PyQt4 UI code generator 4.10.3
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -92,12 +92,12 @@ class Ui_GenerateForm1Dialog(object):
         font.setItalic(True)
         self.passphraseTipsTextEdit.setFont(font)
         self.passphraseTipsTextEdit.setObjectName(_fromUtf8("passphraseTipsTextEdit"))
-        self.pushButton_2 = QtGui.QPushButton(GenerateForm1Dialog)
-        self.pushButton_2.setGeometry(QtCore.QRect(180, 360, 241, 31))
+        self.generateKeyButton = QtGui.QPushButton(GenerateForm1Dialog)
+        self.generateKeyButton.setGeometry(QtCore.QRect(180, 360, 241, 31))
         font = QtGui.QFont()
         font.setPointSize(12)
-        self.pushButton_2.setFont(font)
-        self.pushButton_2.setObjectName(_fromUtf8("pushButton_2"))
+        self.generateKeyButton.setFont(font)
+        self.generateKeyButton.setObjectName(_fromUtf8("generateKeyButton"))
         self.passphraseLengthLabel = QtGui.QLabel(GenerateForm1Dialog)
         self.passphraseLengthLabel.setGeometry(QtCore.QRect(560, 320, 51, 20))
         self.passphraseLengthLabel.setObjectName(_fromUtf8("passphraseLengthLabel"))
@@ -117,6 +117,6 @@ class Ui_GenerateForm1Dialog(object):
 "to guess as possible.It should contain words not found in the dictionary.\n"
 "\n"
 "For example: \"Dirty loondry! Boundry. Stash/\"", None))
-        self.pushButton_2.setText(_translate("GenerateForm1Dialog", "Generate Key", None))
-        self.passphraseLengthLabel.setText(_translate("GenerateForm1Dialog", "<n>", None))
+        self.generateKeyButton.setText(_translate("GenerateForm1Dialog", "Generate Key", None))
+        self.passphraseLengthLabel.setText(_translate("GenerateForm1Dialog", "0", None))
 

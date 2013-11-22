@@ -198,7 +198,7 @@ to guess as possible.It should contain words not found in the dictionary.
 For example: &quot;Dirty loondry! Boundry. Stash/&quot;</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_2">
+  <widget class="QPushButton" name="generateKeyButton">
    <property name="geometry">
     <rect>
      <x>180</x>
@@ -226,7 +226,7 @@ For example: &quot;Dirty loondry! Boundry. Stash/&quot;</string>
     </rect>
    </property>
    <property name="text">
-    <string>&lt;n&gt;</string>
+    <string>0</string>
    </property>
   </widget>
  </widget>

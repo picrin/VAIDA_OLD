@@ -24,14 +24,12 @@ class PrivateKeySelector (QDialog):
         
         #self.ui.privateKeyList = private_keys_users().keys()
         
-        #self.ui.passphraseTextEdit.textChanged.connect(self.passphraseChanged)
-        #self.ui.passphraseTextEdit.textChanged.emit()
-        #self.app.connect(self.ui.passphraseTextEdit, QtCore.SIGNAL("textChanged()"), self.passphraseChanged)
-        #self.ui.passphraseTextEdit.textChanged.emit()
-        
-        #self.ui.loadKeyButton.clicked.connect(self.loadKeyClicked)
+        self.ui.selectKeyButton.clicked.connect(self.selectKey)
         
         self.window.show()
         
-        # Add GenerateForm1 window to openWindows
+    def startMakeVideo(self, passphrase, keyID):
+        form = MakeVideoForm(self, passphrase, keyID)
+        self.window.close()
+        form._exec()
         

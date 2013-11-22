@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'PrivateKeySelectorDialog.ui'
 #
-# Created: Sun Oct 27 16:06:57 2013
-#      by: PyQt4 UI code generator 4.10
+# Created: Wed Nov 20 15:07:31 2013
+#      by: PyQt4 UI code generator 4.10.3
 #
 # WARNING! All changes made in this file will be lost!
 

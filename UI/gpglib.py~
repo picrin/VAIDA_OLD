@@ -1,4 +1,7 @@
 import gnupg, tarfile
+import shutil
+import os
+import tarfile
 
 def sanitise_keys(keys):
     sanitised_all = {}
@@ -39,37 +42,40 @@ def public_keys_details():
     gpg = gnupg.GPG(gnupghome = true_gpg_path)
     return sanitise_keys(gpg.list_keys(False))
 
+def tmp_public_keys_details():
+    gpg = gnupg.GPG(gnupghome = tmp_home)
+    return sanitise_keys(gpg.list_keys(False))
+
+
 def sign_video(video_filepath, passphrase, keyid):
     gpg = gnupg.GPG(gnupghome = true_gpg_path)
     with open(video_filepath, "rb") as stream:
         signed = gpg.sign_file(stream, keyid = keyid, passphrase = passphrase, detach = True)
     print dir(signed)
     print signed.stderr
-    with open(video_filepath + ".signature", "wb") as signed_video:
-        signed_video.write(signed.data)
+    signature_path = video_filepath + ".signature"
+    with open(signature_path, "wb") as video_signature:
+        video_signature.write(signed.data)
+    return signature_path
 
     #result_file = open(video_filepath + ".sig","wb")
     #result_file.write(signed.data)
     #result_file.close()
 
 def create_vaida(video_filepath, passphrase, keyid):
-    #TODO slashes -> windows
-    binary = sign_video(video_filepath, passphrase, keyid)
-    with tarfile.open(name=hvideo_filepath.split("/")[-1] + ".vaida.tar", mode='w', fileobj=None, bufsize=10240) as tar:
+    #TODO slashes -> windows (throughout)
+    signature_path = sign_video(video_filepath, passphrase, keyid)
+    with tarfile.open(name=video_filepath.split("/")[-1] + ".vaida", mode='w', fileobj=None, bufsize=10240) as tar:
         gpg = gnupg.GPG(gnupghome = true_gpg_path)
         armored_key = gpg.export_keys(keyid)
         with open ("pubkey", "wb") as pubkey:
-            pubkey.write(gpg.export_keys(keyid))
-        tar.add(video_filepath, arcname = video_filepath.split("/")[-1])
-        tar.add("pubkey")
-        tar.add(video_filepath + ".signature", arcname = video_filepath.split("/")[-1] + ".signature")
-import shutil
-import os
+            pubkey.write(armored_key)
+        tar.add(video_filepath, arcname = "video")
+        tar.add("pubkey", arcname = "pubkey")
+        tar.add(signature_path, arcname = "signature")
 
-def verify_vaida(vaida_path):
-    if os.path.isdir(tmp_home):
-        shutil.rmtree(tmp_home)
-
+def untar_verify_vaida(vaida_path):
+    _clear_temp()
     gpg = gnupg.GPG(gnupghome = tmp_home)
     with tarfile.open(name = vaida_path, mode = "r") as tar:
         print tar.getnames()
@@ -81,22 +87,30 @@ def verify_vaida(vaida_path):
         print verification.valid
         print verification.stderr
         #print dir(verification)
-    return (verification.valid, imported.fingerprints[0])
+        
+        dicto = tmp_public_keys_details()
+        for key in dicto:
+            expiration = dicto[key]["expires"]
+    return (verification.valid, imported.fingerprints[0], os.path.abspath(tmp_home + "/video"), expiration) 
 
-def add_pub_keyring():
+def _clear_temp():
+    if os.path.isdir(tmp_home):
+        shutil.rmtree(tmp_home)
+
+def add_tmp_to_keyring():
     gpg = gnupg.GPG(gnupghome = true_gpg_path)
     with open(tmp_home + "pubkey", "rb") as pubkey:
         trusted = gpg.import_keys(pubkey.read())
     print dir(trusted)
     print trusted.stderr
-    if os.path.isdir(tmp_home):
-        shutil.rmtree(tmp_home)
-    return "success!"
-print public_keys_users()
+    _clear_temp()
+
 #create_vaida("/home/picrin/programming/VAIDA/Honey_Sample_G.avi", "dirty loondry boundry. stash/", u"D98029C596F20E5D")
 #print verify_vaida("/home/picrin/programming/VAIDA/backend/Honey_Sample_G.avi.vaida.tar")
 #add_pub_keyring()
 #print public_keys_details()
 #print private_keys_details()
 #generate_gpg_key("Hugh McGrade (do not trust)", "hmg (do not trust)", "hugh@mcgrade.ac.uk (do not trust)", "dirty loondry boundry. stash/")
-
+#create_vaida("/home/hugh/Documents/VAIDA/UI/video004.mp4", "dirty loondry boundry. stash/", u"62CDD87039635942")
+#untar_verify_vaida("video004.mp4.vaida")
+print public_keys_details()
