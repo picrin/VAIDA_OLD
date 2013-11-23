@@ -15,7 +15,7 @@ class GenerateForm1 (QDialog):
         newForm._exec()
     
     def startMakeVideo(self):
-        form = MakeVideoForm(self)
+        form = MakeVideoForm(self.app)
         self.window.close()
         form._exec()
     

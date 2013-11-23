@@ -3,11 +3,17 @@ from PyQt4.QtGui import QApplication, QDialog
 from PrivateKeySelectorDialog import *
 from PyQt4.QtGui import QListWidgetItem
 from gpglib import *
+from MakeVideoForm import *
 
 def showPrivateKeySelector(app):
     PrivateKeySelector(app)
 
 class PrivateKeySelector (QDialog):
+    
+    def startMakeVideo(self, passphrase, keyID):
+        form = MakeVideoForm(self.app, passphrase, keyID)
+        self.window.close()
+        form._exec()
     
     def __init__(self, app):
         #Set up window
@@ -28,8 +34,9 @@ class PrivateKeySelector (QDialog):
         
         self.window.show()
         
-    def startMakeVideo(self, passphrase, keyID):
-        form = MakeVideoForm(self, passphrase, keyID)
-        self.window.close()
-        form._exec()
+    def selectKey(self):
+        # TODO rename "lineEdit" to something descriptive
+        passphrase = self.ui.lineEdit.text()
+        keyID = "123"
+        self.startMakeVideo(passphrase, keyID)
         

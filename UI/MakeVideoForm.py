@@ -5,13 +5,13 @@ from PrivateKeySelector import *
 
 class GenerateForm1 (QDialog):
     
-    def passphraseChanged(self):
-        self.ui.passphraseLengthLabel.setText(str(len(self.ui.passphraseTextEdit.toPlainText())))
+   # def passphraseChanged(self):
+    #    self.ui.passphraseLengthLabel.setText(str(len(self.ui.passphraseTextEdit.toPlainText())))
     
-    def loadKeyClicked(self):
-        newForm = PrivateKeySelector(self.app)
-        self.window.close()
-        newForm._exec()
+#    def loadKeyClicked(self):
+#        newForm = PrivateKeySelector(self.app)
+#        self.window.close()
+#        newForm._exec()
     
     def __init__(self, app, passphrase, keyID):
         super(QDialog, self).__init__()
@@ -23,8 +23,8 @@ class GenerateForm1 (QDialog):
         self.ui.setupUi(self.window)
         
         # Set up connections
-        self.ui.passphraseTextEdit.textChanged.connect(self.passphraseChanged)
-        self.ui.loadKeyButton.clicked.connect(self.loadKeyClicked)
+        #self.ui.passphraseTextEdit.textChanged.connect(self.passphraseChanged)
+        #self.ui.loadKeyButton.clicked.connect(self.loadKeyClicked)
         
         self.window.show()
         
