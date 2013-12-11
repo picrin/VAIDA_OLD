@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>547</width>
-    <height>432</height>
+    <width>539</width>
+    <height>525</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -31,32 +31,12 @@
     <string>Your key fingerprint is:</string>
    </property>
   </widget>
-  <widget class="QLabel" name="keyLabel">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>60</y>
-     <width>531</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>16</pointsize>
-     <weight>75</weight>
-     <bold>true</bold>
-    </font>
-   </property>
-   <property name="text">
-    <string>0a.1b.2c:3d</string>
-   </property>
-  </widget>
   <widget class="QLabel" name="instructionsLabel">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>270</y>
-     <width>491</width>
+     <x>10</x>
+     <y>340</y>
+     <width>511</width>
      <height>101</height>
     </rect>
    </property>
@@ -73,7 +53,7 @@
    <property name="geometry">
     <rect>
      <x>150</x>
-     <y>380</y>
+     <y>450</y>
      <width>211</width>
      <height>41</height>
     </rect>
@@ -87,12 +67,12 @@
     <string>Import Video</string>
    </property>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>110</y>
-     <width>491</width>
+     <x>10</x>
+     <y>190</y>
+     <width>511</width>
      <height>151</height>
     </rect>
    </property>
@@ -105,7 +85,7 @@
        </font>
       </property>
       <property name="text">
-       <string>Name: Hugh McGrade</string>
+       <string>Name:</string>
       </property>
      </widget>
     </item>
@@ -117,7 +97,7 @@
        </font>
       </property>
       <property name="text">
-       <string>Email Address: hugh_mcgrade@hotmail.co.uk</string>
+       <string>Email Address:</string>
       </property>
      </widget>
     </item>
@@ -129,7 +109,7 @@
        </font>
       </property>
       <property name="text">
-       <string>Expires: 1 October 2015</string>
+       <string>Expires:</string>
       </property>
      </widget>
     </item>
@@ -141,11 +121,35 @@
        </font>
       </property>
       <property name="text">
-       <string>Date: 27 October 2013</string>
+       <string>Date:</string>
       </property>
      </widget>
     </item>
    </layout>
+  </widget>
+  <widget class="QTextEdit" name="fingerprintTextEdit">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>70</y>
+     <width>521</width>
+     <height>111</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>14</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="html">
+    <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:14pt; font-weight:600; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Fingerprint Goes Here&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
   </widget>
  </widget>
  <resources/>

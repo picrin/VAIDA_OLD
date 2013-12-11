@@ -14,7 +14,7 @@ class VAIDAApp (QApplication) :
         # Create
         form = GenerateForm1(self)
         self.window.close()
-        form._exec()
+        form.exec()
 
     def onVerifyButtonClicked(self):
         # Verify
@@ -22,7 +22,7 @@ class VAIDAApp (QApplication) :
         fname = str(QtGui.QFileDialog.getOpenFileName(caption="Choose a VAIDA file", directory=homeDir))
         form = VideoVerificationForm(self, vaidaPath=fname)
         self.window.close()
-        form._exec()
+        form.exec()
 
     def closeApp(self):
         # Kill the app
@@ -47,5 +47,5 @@ class VAIDAApp (QApplication) :
         
         # Start QApplication loop
         sys.exit(self.exec_())
-			
+
 VAIDAApp(sys.argv)
