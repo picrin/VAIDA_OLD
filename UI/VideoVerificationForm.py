@@ -21,7 +21,7 @@ class VideoVerificationForm (QDialog) :
     def __init__(self, app, vaidaPath):
         super(QDialog, self).__init__()
         
-        success, fingerprint, absoluteVideoPath, dateUInt = untar_verify_vaida(vaidaPath)
+        success, fingerprint, absoluteVideoPath, dateUInt, uid = untar_verify_vaida(vaidaPath)
         
         expirationDate = uIntToString.uIntToString(dateUInt)
         
@@ -38,6 +38,11 @@ class VideoVerificationForm (QDialog) :
         self.ui.fingerprintLabel.setText("Key fingerprint: " + fingerprint)
         self.ui.keyExpirationLabel.setText("Key expiration date: " + expirationDate)
         
+        # First name
+        name = uid.split("<")[0].strip()
+        self.ui.checkBox.setText("Does this look like " + name + "?")
+        self.ui.checkBox_2.setText("Does this sound like " + name + "?")
+
         # Set media
         self.source = Phonon.MediaSource(absoluteVideoPath)
         self.media = Phonon.MediaObject()
@@ -51,7 +56,7 @@ class VideoVerificationForm (QDialog) :
         self.audio = Phonon.AudioOutput(Phonon.VideoCategory, self.ui.videoPlayerWidget)
         Phonon.createPath(self.media, self.audio)
         Phonon.createPath(self.media, self.video)
-        
+
         self.ui.checkBox.stateChanged.connect(self.checkBoxChecked)
         self.ui.checkBox_2.stateChanged.connect(self.checkBoxChecked)
         self.ui.checkBox_3.stateChanged.connect(self.checkBoxChecked)

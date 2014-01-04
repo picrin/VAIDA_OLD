@@ -130,7 +130,8 @@ def untar_verify_vaida(vaida_path):
         dicto = tmp_public_keys_details()
         for key in dicto:
             expiration = dicto[key]["expires"]
-    return (verification.valid, imported.fingerprints[0], os.path.abspath(os.path.join(tmp_home, "video")), expiration) 
+            uid = dicto[key]["uid"]
+    return (verification.valid, imported.fingerprints[0], os.path.abspath(os.path.join(tmp_home, "video")), expiration, uid) 
 
 def _clear_temp():
     if os.path.isdir(tmp_home):
