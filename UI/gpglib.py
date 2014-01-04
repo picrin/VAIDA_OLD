@@ -33,8 +33,8 @@ def _user_to_key_dict(private_keys):
 #print sanitise_keys(keys)
 
 # expanduser?
-true_gpg_path = '~/.gnupg'
-tmp_home = 'tmpgpg/'
+#true_gpg_path = '''~/.gnupg'
+#tmp_home = ''#'tmpgpg/'
 
 current_os = system()
 if current_os == "Windows":
@@ -42,8 +42,8 @@ if current_os == "Windows":
     tmp_home = os.path.join(os.environ['APPDATA'], 'tmpgpg')
     #os.makedirs(tmp_home)
 elif current_os == "Linux":
-    true_gpg_path = os.path.expanduser('~/.gnupg')
-    tmp_home = os.path.expanduser('tmpgpg/')
+    true_gpg_path = os.path.join(os.environ['HOME'], '.gnupg')#os.path.expanduser('.gnupg')
+    tmp_home = os.path.join(os.environ['HOME'], '.tmpgpg')#os.path.expanduser('tmpgpg')
     #os.makedirs(tmp_home)
 else:
     # TODO Confirm
@@ -128,7 +128,7 @@ def untar_verify_vaida(vaida_path):
         dicto = tmp_public_keys_details()
         for key in dicto:
             expiration = dicto[key]["expires"]
-    return (verification.valid, imported.fingerprints[0], os.path.abspath(os.path.join(tmp_home, "/video")), expiration) 
+    return (verification.valid, imported.fingerprints[0], os.path.abspath(os.path.join(tmp_home, "video")), expiration) 
 
 def _clear_temp():
     if os.path.isdir(tmp_home):
