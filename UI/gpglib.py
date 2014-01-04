@@ -102,7 +102,8 @@ def _sign_video(video_filepath, passphrase, keyid):
 def create_vaida(video_filepath, passphrase, keyid):
     #TODO slashes -> windows (throughout)
     signature_path = _sign_video(video_filepath, passphrase, keyid)
-    with tarfile.open(name=video_filepath.split(os.path.sep)[-1] + ".vaida", mode='w', fileobj=None, bufsize=10240) as tar:
+    vaida_path = video_filepath + ".vaida"
+    with tarfile.open(name=vaida_path, mode='w', fileobj=None, bufsize=10240) as tar:
         gpg = gnupg.GPG(gnupghome = true_gpg_path)
         armored_key = gpg.export_keys(keyid)
         with open ("pubkey", "wb") as pubkey:
@@ -110,6 +111,7 @@ def create_vaida(video_filepath, passphrase, keyid):
         tar.add(video_filepath, arcname = "video")
         tar.add("pubkey", arcname = "pubkey")
         tar.add(signature_path, arcname = "signature")
+    return vaida_path
 
 def untar_verify_vaida(vaida_path):
     _clear_temp()
@@ -136,7 +138,7 @@ def _clear_temp():
 
 def add_tmp_to_keyring():
     gpg = gnupg.GPG(gnupghome = true_gpg_path)
-    with open(tmp_home + "pubkey", "rb") as pubkey:
+    with open(os.path.join(tmp_home, "pubkey"), "rb") as pubkey:
         trusted = gpg.import_keys(pubkey.read())
     print (dir(trusted))
     print (trusted.stderr)
