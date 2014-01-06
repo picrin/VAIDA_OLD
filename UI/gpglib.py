@@ -28,8 +28,6 @@ def _user_to_key_dict(private_keys):
         user_key[key['uids'][0]] = key['keyid']
     return user_key
 
-
-
 #print sanitise_keys(keys)
 
 # expanduser?
@@ -51,13 +49,13 @@ else:
     tmp_home = os.path.expanduser('tmpgpg/')
     #os.makedirs(tmp_home)
 
+def create_tmp_home():
+    if not os.path.isdir(tmp_home):
+        os.makedirs(tmp_home)
+
 def generate_gpg_key(real_name, nickname, email, passphrase, key_length = 2048, key_type = "RSA", expire_date = "1y"):
     gpg = gnupg.GPG(gnupghome = true_gpg_path)
-    gpg_key = gpg.gen_key(gpg.gen_key_input(key_type = key_type, key_length = key_length, name_real = real_name, name_comment = nickname, name_email = email, expire_date = expire_date, passphrase = passphrase))
-    if "KEY_CREATED" in gpg_key.stderr:
-    	return True
-    else:
-    	return False
+    return gpg.gen_key(gpg.gen_key_input(key_type = key_type, key_length = key_length, name_real = real_name, name_comment = nickname, name_email = email, expire_date = expire_date, passphrase = passphrase))
 
 def private_keys_users():
     gpg = gnupg.GPG(gnupghome = true_gpg_path)
@@ -76,6 +74,7 @@ def tmp_public_keys_details():
     return sanitise_keys(gpg.list_keys(False))
 
 def test_passphrase(keyid, passphrase):
+    create_tmp_home()
     gpg = gnupg.GPG(gnupghome = true_gpg_path)
     with open(os.path.join(tmp_home, "tmp_signed"), "a+") as stream:
         signed = gpg.sign_file(stream, keyid = keyid, passphrase = passphrase, detach = False)

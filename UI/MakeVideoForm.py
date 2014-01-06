@@ -1,10 +1,9 @@
-from PyQt4.QtGui import QDialog, QFileDialog, QMessageBox
+from PyQt4.QtGui import QDialog, QFileDialog
 from MakeVideoFormLayout import Ui_MakeVideoForm
 from gpglib import public_keys_details, create_vaida
 import re
 from uIntToString import uIntToString
 from os.path import expanduser
-from KeySavedForm import KeySavedForm
 
 class MakeVideoForm (QDialog):
     
@@ -16,19 +15,11 @@ class MakeVideoForm (QDialog):
 #        self.window.close()
 #        newForm.exec()
 
+
     def importVideo(self):
         homeDir = expanduser("~")
         fname = str(QFileDialog.getOpenFileName(caption="Import a video", directory=homeDir))
-        if not fname:
-            # Empty filename
-            pass
-        else:
-            vaidaPath = create_vaida(fname, self.passphrase, self.keyID)
-            messageBox = QMessageBox()
-            messageBox.setText("VAIDA Created at " + vaidaPath)
-            messageBox.exec()
-            self.close()
-        
+        create_vaida(fname, self.passphrase, self.keyID)
     
     def extract_name_and_email(self, uid):
         result = re.search('(.*?)<(.*?)>', uid, flags=0)
