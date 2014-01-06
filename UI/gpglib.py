@@ -53,7 +53,11 @@ else:
 
 def generate_gpg_key(real_name, nickname, email, passphrase, key_length = 2048, key_type = "RSA", expire_date = "1y"):
     gpg = gnupg.GPG(gnupghome = true_gpg_path)
-    return gpg.gen_key(gpg.gen_key_input(key_type = key_type, key_length = key_length, name_real = real_name, name_comment = nickname, name_email = email, expire_date = expire_date, passphrase = passphrase))
+    gpg_key = gpg.gen_key(gpg.gen_key_input(key_type = key_type, key_length = key_length, name_real = real_name, name_comment = nickname, name_email = email, expire_date = expire_date, passphrase = passphrase))
+    if "KEY_CREATED" in gpg_key.stderr:
+    	return True
+    else:
+    	return False
 
 def private_keys_users():
     gpg = gnupg.GPG(gnupghome = true_gpg_path)

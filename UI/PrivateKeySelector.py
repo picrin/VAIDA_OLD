@@ -51,7 +51,8 @@ class PrivateKeySelector (QDialog):
         if not test_passphrase(keyID, passphrase):
             message = QMessageBox()
             message.setText("Incorrect passphrase")
-            message.show()
+            #message.show()
+            message.exec()
             return
         
         #_user_to_key_dict(self.keysDict)[selected]
