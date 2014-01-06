@@ -1,7 +1,8 @@
-import gnupg, tarfile
+import gnupg
 import shutil
 import os
 import tarfile
+from platform import system
 
 def sanitise_keys(keys):
     sanitised_all = {}
@@ -11,20 +12,46 @@ def sanitise_keys(keys):
         sanitised_key['expires'] = key['expires']
         sanitised_key['fingerprint'] = key['fingerprint']
         sanitised_key['length'] = key['length']
-        sanitised_key['uid'] = key['uids'][0]
+        sanitised_key['uid'] = key['uids'][0] # Ignoring rest of array
         sanitised_all[key['keyid']] = sanitised_key
     return sanitised_all
 
-def user_to_key_dict(private_keys):
+def _user_to_key_dict(private_keys):
     user_key = {}
+    print (private_keys)
     for key in private_keys:
+        #print (key)
+        #dict_uids = key['uids']
+        #print dict_uids
+        #dict_key = dict_uids[0]
+        #print dict_key
         user_key[key['uids'][0]] = key['keyid']
     return user_key
 
 #print sanitise_keys(keys)
 
-true_gpg_path = '~/.gnupg'
-tmp_home = 'tmpgpg/'
+# expanduser?
+#true_gpg_path = '''~/.gnupg'
+#tmp_home = ''#'tmpgpg/'
+
+current_os = system()
+if current_os == "Windows":
+    true_gpg_path = os.path.join(os.environ['APPDATA'], 'gnupg')
+    tmp_home = os.path.join(os.environ['APPDATA'], 'tmpgpg')
+    #os.makedirs(tmp_home)
+elif current_os == "Linux":
+    true_gpg_path = os.path.join(os.environ['HOME'], '.gnupg')#os.path.expanduser('.gnupg')
+    tmp_home = os.path.join(os.environ['HOME'], '.tmpgpg')#os.path.expanduser('tmpgpg')
+    #os.makedirs(tmp_home)
+else:
+    # TODO Confirm
+    true_gpg_path = os.path.expanduser('~/.gnupg')
+    tmp_home = os.path.expanduser('tmpgpg/')
+    #os.makedirs(tmp_home)
+
+def create_tmp_home():
+    if not os.path.isdir(tmp_home):
+        os.makedirs(tmp_home)
 
 def generate_gpg_key(real_name, nickname, email, passphrase, key_length = 2048, key_type = "RSA", expire_date = "1y"):
     gpg = gnupg.GPG(gnupghome = true_gpg_path)
@@ -32,7 +59,7 @@ def generate_gpg_key(real_name, nickname, email, passphrase, key_length = 2048, 
 
 def private_keys_users():
     gpg = gnupg.GPG(gnupghome = true_gpg_path)
-    return user_to_key_dict(gpg.list_keys(True))
+    return _user_to_key_dict(gpg.list_keys(True))
 
 def private_keys_details():
     gpg = gnupg.GPG(gnupghome = true_gpg_path)
@@ -46,13 +73,26 @@ def tmp_public_keys_details():
     gpg = gnupg.GPG(gnupghome = tmp_home)
     return sanitise_keys(gpg.list_keys(False))
 
+def test_passphrase(keyid, passphrase):
+    create_tmp_home()
+    gpg = gnupg.GPG(gnupghome = true_gpg_path)
+    with open(os.path.join(tmp_home, "tmp_signed"), "a+") as stream:
+        signed = gpg.sign_file(stream, keyid = keyid, passphrase = passphrase, detach = False)
+        print (signed.stderr)
+        if "BAD_PASSPHRASE" in signed.stderr:
+            return False
+        else:
+            return True
 
-def sign_video(video_filepath, passphrase, keyid):
+def _sign_video(video_filepath, passphrase, keyid):
     gpg = gnupg.GPG(gnupghome = true_gpg_path)
     with open(video_filepath, "rb") as stream:
         signed = gpg.sign_file(stream, keyid = keyid, passphrase = passphrase, detach = True)
-    print dir(signed)
-    print signed.stderr
+    print (dir(signed))
+    print (signed.stderr)
+    if signed.stderr:
+        # Failed
+        pass
     signature_path = video_filepath + ".signature"
     with open(signature_path, "wb") as video_signature:
         video_signature.write(signed.data)
@@ -64,34 +104,37 @@ def sign_video(video_filepath, passphrase, keyid):
 
 def create_vaida(video_filepath, passphrase, keyid):
     #TODO slashes -> windows (throughout)
-    signature_path = sign_video(video_filepath, passphrase, keyid)
-    with tarfile.open(name=video_filepath.split("/")[-1] + ".vaida", mode='w', fileobj=None, bufsize=10240) as tar:
+    signature_path = _sign_video(video_filepath, passphrase, keyid)
+    vaida_path = video_filepath + ".vaida"
+    with tarfile.open(name=vaida_path, mode='w', fileobj=None, bufsize=10240) as tar:
         gpg = gnupg.GPG(gnupghome = true_gpg_path)
         armored_key = gpg.export_keys(keyid)
         with open ("pubkey", "wb") as pubkey:
-            pubkey.write(armored_key)
+            pubkey.write(bytes(armored_key, 'UTF-8'))
         tar.add(video_filepath, arcname = "video")
         tar.add("pubkey", arcname = "pubkey")
         tar.add(signature_path, arcname = "signature")
+    return vaida_path
 
 def untar_verify_vaida(vaida_path):
     _clear_temp()
     gpg = gnupg.GPG(gnupghome = tmp_home)
     with tarfile.open(name = vaida_path, mode = "r") as tar:
-        print tar.getnames()
+        print (tar.getnames())
         tar.extractall(tmp_home)
-        with open(tmp_home + "pubkey", "rb") as pubkey:
+        with open(os.path.join(tmp_home, "pubkey"), "rb") as pubkey:
             imported = gpg.import_keys(pubkey.read())
-        print dir(imported)
-        verification = gpg.verify_file(open(tmp_home + tar.getnames()[2], "rb"), tmp_home + tar.getnames()[0])
-        print verification.valid
-        print verification.stderr
+        print (dir(imported))
+        verification = gpg.verify_file(open(os.path.join(tmp_home, tar.getnames()[2]), "rb"), os.path.join(tmp_home, tar.getnames()[0]))
+        print (verification.valid)
+        print (verification.stderr)
         #print dir(verification)
         
         dicto = tmp_public_keys_details()
         for key in dicto:
             expiration = dicto[key]["expires"]
-    return (verification.valid, imported.fingerprints[0], os.path.abspath(tmp_home + "/video"), expiration) 
+            uid = dicto[key]["uid"]
+    return (verification.valid, imported.fingerprints[0], os.path.abspath(os.path.join(tmp_home, "video")), expiration, uid) 
 
 def _clear_temp():
     if os.path.isdir(tmp_home):
@@ -99,10 +142,10 @@ def _clear_temp():
 
 def add_tmp_to_keyring():
     gpg = gnupg.GPG(gnupghome = true_gpg_path)
-    with open(tmp_home + "pubkey", "rb") as pubkey:
+    with open(os.path.join(tmp_home, "pubkey"), "rb") as pubkey:
         trusted = gpg.import_keys(pubkey.read())
-    print dir(trusted)
-    print trusted.stderr
+    print (dir(trusted))
+    print (trusted.stderr)
     _clear_temp()
 
 #create_vaida("/home/picrin/programming/VAIDA/Honey_Sample_G.avi", "dirty loondry boundry. stash/", u"D98029C596F20E5D")
@@ -113,5 +156,5 @@ def add_tmp_to_keyring():
 #generate_gpg_key("Hugh McGrade (do not trust)", "hmg (do not trust)", "hugh@mcgrade.ac.uk (do not trust)", "dirty loondry boundry. stash/")
 #create_vaida("/home/hugh/Documents/VAIDA/UI/video004.mp4", "dirty loondry boundry. stash/", u"62CDD87039635942")
 #untar_verify_vaida("video004.mp4.vaida")
-print public_keys_details()
-print private_keys_details()
+#print public_keys_details()
+#print private_keys_details()
