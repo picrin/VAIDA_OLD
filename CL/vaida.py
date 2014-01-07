@@ -13,7 +13,7 @@ if command == "generate":
     x = 0
     # Generate
 elif command == "verify":
-    vaida_file = sys.argv[1]
+    vaida_file = sys.argv[2]
     verify_vaida.verify(vaida_file)
     # Verify
 elif command == "help":
