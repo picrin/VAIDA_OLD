@@ -15,13 +15,13 @@ class VideoVerificationForm (QDialog) :
         if (self.ui.checkBox.isChecked() and self.ui.checkBox_2.isChecked() and self.ui.checkBox_3.isChecked() and self.ui.checkBox_4.isChecked()):
             add_tmp_to_keyring()
             newForm = KeySavedForm(self.app)
-            self.window.close()
-            newForm._exec()
+            self.close()
+            newForm.exec()
    
     def __init__(self, app, vaidaPath):
         super(QDialog, self).__init__()
         
-        success, fingerprint, absoluteVideoPath, dateUInt = untar_verify_vaida(vaidaPath)
+        success, fingerprint, absoluteVideoPath, dateUInt, uid = untar_verify_vaida(vaidaPath)
         
         expirationDate = uIntToString.uIntToString(dateUInt)
         
@@ -30,15 +30,19 @@ class VideoVerificationForm (QDialog) :
             #Delete tmp?
             return
         
-        self.window = QDialog()
         self.ui = Ui_VideoVerificationDialog()
-        self.ui.setupUi(self.window)
+        self.ui.setupUi(self)
         self.app = app
         
         # Set text
         self.ui.fingerprintLabel.setText("Key fingerprint: " + fingerprint)
         self.ui.keyExpirationLabel.setText("Key expiration date: " + expirationDate)
         
+        # First name
+        name = uid.split("<")[0].strip()
+        self.ui.checkBox.setText("Does this look like " + name + "?")
+        self.ui.checkBox_2.setText("Does this sound like " + name + "?")
+
         # Set media
         self.source = Phonon.MediaSource(absoluteVideoPath)
         self.media = Phonon.MediaObject()
@@ -52,13 +56,13 @@ class VideoVerificationForm (QDialog) :
         self.audio = Phonon.AudioOutput(Phonon.VideoCategory, self.ui.videoPlayerWidget)
         Phonon.createPath(self.media, self.audio)
         Phonon.createPath(self.media, self.video)
-        
+
         self.ui.checkBox.stateChanged.connect(self.checkBoxChecked)
         self.ui.checkBox_2.stateChanged.connect(self.checkBoxChecked)
         self.ui.checkBox_3.stateChanged.connect(self.checkBoxChecked)
         self.ui.checkBox_4.stateChanged.connect(self.checkBoxChecked)
         
-        self.window.show()
+        self.show()
         
         # Add VideoVerificationForm window to openWindows list
         #app.openWindows = app.openWindows + [self]
