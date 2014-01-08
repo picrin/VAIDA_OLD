@@ -26,6 +26,9 @@ class VideoVerificationForm (QDialog) :
         expirationDate = uIntToString.uIntToString(dateUInt)
         
         if not success:
+            message = QMessageBox()
+            message.setText("VAIDA verification failed!")
+            message.exec()
             #TODO QMessageBox
             #Delete tmp?
             return

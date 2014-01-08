@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'HomeLayout.ui'
 #
-# Created: Wed Dec 11 19:45:36 2013
+# Created: Wed Jan  8 00:29:53 2014
 #      by: PyQt4 UI code generator 4.10.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -26,7 +26,7 @@ except AttributeError:
 class Ui_HomeDialog(object):
     def setupUi(self, HomeDialog):
         HomeDialog.setObjectName(_fromUtf8("HomeDialog"))
-        HomeDialog.resize(544, 202)
+        HomeDialog.resize(600, 202)
         self.horizontalLayoutWidget = QtGui.QWidget(HomeDialog)
         self.horizontalLayoutWidget.setGeometry(QtCore.QRect(-1, -1, 2, 2))
         self.horizontalLayoutWidget.setObjectName(_fromUtf8("horizontalLayoutWidget"))
@@ -34,7 +34,7 @@ class Ui_HomeDialog(object):
         self.horizontalLayout.setMargin(0)
         self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))
         self.createLabel = QtGui.QLabel(HomeDialog)
-        self.createLabel.setGeometry(QtCore.QRect(20, 20, 201, 111))
+        self.createLabel.setGeometry(QtCore.QRect(40, 10, 201, 111))
         font = QtGui.QFont()
         font.setPointSize(18)
         font.setBold(True)
@@ -44,7 +44,7 @@ class Ui_HomeDialog(object):
         self.createLabel.setAlignment(QtCore.Qt.AlignCenter)
         self.createLabel.setObjectName(_fromUtf8("createLabel"))
         self.createButton = QtGui.QPushButton(HomeDialog)
-        self.createButton.setGeometry(QtCore.QRect(30, 140, 181, 41))
+        self.createButton.setGeometry(QtCore.QRect(50, 130, 181, 41))
         font = QtGui.QFont()
         font.setPointSize(16)
         font.setBold(True)
@@ -58,7 +58,7 @@ class Ui_HomeDialog(object):
         self.horizontalLayout_2.setMargin(0)
         self.horizontalLayout_2.setObjectName(_fromUtf8("horizontalLayout_2"))
         self.verifyButton = QtGui.QPushButton(HomeDialog)
-        self.verifyButton.setGeometry(QtCore.QRect(310, 140, 181, 41))
+        self.verifyButton.setGeometry(QtCore.QRect(360, 130, 181, 41))
         font = QtGui.QFont()
         font.setPointSize(16)
         font.setBold(True)
@@ -66,7 +66,7 @@ class Ui_HomeDialog(object):
         self.verifyButton.setFont(font)
         self.verifyButton.setObjectName(_fromUtf8("verifyButton"))
         self.verifyLabel = QtGui.QLabel(HomeDialog)
-        self.verifyLabel.setGeometry(QtCore.QRect(290, 20, 201, 111))
+        self.verifyLabel.setGeometry(QtCore.QRect(340, 10, 201, 111))
         font = QtGui.QFont()
         font.setPointSize(18)
         font.setBold(True)
@@ -76,7 +76,7 @@ class Ui_HomeDialog(object):
         self.verifyLabel.setAlignment(QtCore.Qt.AlignCenter)
         self.verifyLabel.setObjectName(_fromUtf8("verifyLabel"))
         self.line = QtGui.QFrame(HomeDialog)
-        self.line.setGeometry(QtCore.QRect(250, 20, 20, 161))
+        self.line.setGeometry(QtCore.QRect(270, 20, 20, 161))
         self.line.setFrameShadow(QtGui.QFrame.Plain)
         self.line.setLineWidth(2)
         self.line.setFrameShape(QtGui.QFrame.VLine)

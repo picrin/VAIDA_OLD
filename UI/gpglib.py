@@ -148,6 +148,8 @@ def add_tmp_to_keyring():
     print (trusted.stderr)
     _clear_temp()
 
+create_tmp_home()
+
 #create_vaida("/home/picrin/programming/VAIDA/Honey_Sample_G.avi", "dirty loondry boundry. stash/", u"D98029C596F20E5D")
 #print verify_vaida("/home/picrin/programming/VAIDA/backend/Honey_Sample_G.avi.vaida.tar")
 #add_pub_keyring()
