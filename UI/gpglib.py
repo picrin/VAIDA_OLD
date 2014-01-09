@@ -138,6 +138,7 @@ def untar_verify_vaida(vaida_path):
 
 def _clear_temp():
     if os.path.isdir(tmp_home):
+        # TODO I understand this won't work on Windows or Ubuntu
         shutil.rmtree(tmp_home)
 
 def add_tmp_to_keyring():
