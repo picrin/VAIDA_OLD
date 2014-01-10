@@ -8,5 +8,3 @@ def uIntToString(uintTime):
     month = calendar.month_name[timeStruct.tm_mon]
     day = str(timeStruct.tm_mday)
     return day + " " + month + " " + year
-
-print (uIntToString(1382864906))

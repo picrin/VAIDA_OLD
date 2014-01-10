@@ -20,6 +20,9 @@ class VAIDAApp (QApplication) :
         # Verify
         homeDir = expanduser("~")
         fname = str(QtGui.QFileDialog.getOpenFileName(caption="Choose a VAIDA file", directory=homeDir))
+        if len(fname) == 0:
+            # No file selected (dialog cancelled)
+            return
         form = VideoVerificationForm(self, vaidaPath=fname)
         self.window.close()
         form.exec()

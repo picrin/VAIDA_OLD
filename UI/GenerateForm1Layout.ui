@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>611</width>
-    <height>401</height>
+    <width>646</width>
+    <height>536</height>
    </rect>
   </property>
   <property name="font">
@@ -23,7 +23,7 @@
     <rect>
      <x>0</x>
      <y>10</y>
-     <width>601</width>
+     <width>651</width>
      <height>51</height>
     </rect>
    </property>
@@ -45,8 +45,8 @@
   <widget class="QPushButton" name="loadKeyButton">
    <property name="geometry">
     <rect>
-     <x>180</x>
-     <y>60</y>
+     <x>210</x>
+     <y>70</y>
      <width>241</width>
      <height>31</height>
     </rect>
@@ -65,7 +65,7 @@
     <rect>
      <x>0</x>
      <y>100</y>
-     <width>601</width>
+     <width>651</width>
      <height>51</height>
     </rect>
    </property>
@@ -107,7 +107,7 @@
     <rect>
      <x>190</x>
      <y>150</y>
-     <width>401</width>
+     <width>451</width>
      <height>31</height>
     </rect>
    </property>
@@ -119,7 +119,7 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>190</y>
+     <y>200</y>
      <width>151</width>
      <height>21</height>
     </rect>
@@ -137,8 +137,8 @@
    <property name="geometry">
     <rect>
      <x>190</x>
-     <y>180</y>
-     <width>401</width>
+     <y>190</y>
+     <width>451</width>
      <height>31</height>
     </rect>
    </property>
@@ -150,7 +150,7 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>320</y>
+     <y>390</y>
      <width>171</width>
      <height>21</height>
     </rect>
@@ -164,25 +164,12 @@
     <string>Passphrase</string>
    </property>
   </widget>
-  <widget class="QPlainTextEdit" name="passphraseTextEdit">
-   <property name="geometry">
-    <rect>
-     <x>190</x>
-     <y>310</y>
-     <width>361</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="tabChangesFocus">
-    <bool>true</bool>
-   </property>
-  </widget>
   <widget class="QLabel" name="passphraseTipsTextEdit">
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>220</y>
-     <width>561</width>
+     <y>290</y>
+     <width>621</width>
      <height>81</height>
     </rect>
    </property>
@@ -201,8 +188,8 @@ For example: &quot;Dirty loondry! Boundry. Stash/&quot;</string>
   <widget class="QPushButton" name="generateKeyButton">
    <property name="geometry">
     <rect>
-     <x>180</x>
-     <y>360</y>
+     <x>210</x>
+     <y>490</y>
      <width>241</width>
      <height>31</height>
     </rect>
@@ -219,14 +206,89 @@ For example: &quot;Dirty loondry! Boundry. Stash/&quot;</string>
   <widget class="QLabel" name="passphraseLengthLabel">
    <property name="geometry">
     <rect>
-     <x>560</x>
-     <y>320</y>
+     <x>590</x>
+     <y>390</y>
      <width>51</width>
      <height>20</height>
     </rect>
    </property>
    <property name="text">
     <string>0</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="passphraseLineEdit">
+   <property name="geometry">
+    <rect>
+     <x>170</x>
+     <y>390</y>
+     <width>401</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="echoMode">
+    <enum>QLineEdit::Password</enum>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="repeatPassphraseLineEdit">
+   <property name="geometry">
+    <rect>
+     <x>170</x>
+     <y>440</y>
+     <width>401</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="echoMode">
+    <enum>QLineEdit::Password</enum>
+   </property>
+  </widget>
+  <widget class="QLabel" name="passphraseLabel_2">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>440</y>
+     <width>171</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Repeat Passphrase</string>
+   </property>
+  </widget>
+  <widget class="QPlainTextEdit" name="nicknameTextEdit">
+   <property name="geometry">
+    <rect>
+     <x>190</x>
+     <y>230</y>
+     <width>451</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="tabChangesFocus">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="emailLabel_2">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>240</y>
+     <width>161</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Nickname (optional):</string>
    </property>
   </widget>
  </widget>

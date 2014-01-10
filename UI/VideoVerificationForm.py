@@ -10,13 +10,22 @@ import os.path
 import uIntToString
 
 class VideoVerificationForm (QDialog) :
-        
+
+    def showMessage(self, text):
+        message = QMessageBox()
+        message.setText(text)
+        message.exec()
+
     def checkBoxChecked(self, x):
         if (self.ui.checkBox.isChecked() and self.ui.checkBox_2.isChecked() and self.ui.checkBox_3.isChecked() and self.ui.checkBox_4.isChecked()):
-            add_tmp_to_keyring()
-            newForm = KeySavedForm(self.app)
-            self.close()
-            newForm.exec()
+            try:
+                add_tmp_to_keyring()
+            except GPGException as e:
+                self.showMessage(str(e))
+            else:
+                newForm = KeySavedForm(self.app)
+                self.close()
+                newForm.exec()
    
     def __init__(self, app, vaidaPath):
         super(QDialog, self).__init__()
@@ -26,8 +35,7 @@ class VideoVerificationForm (QDialog) :
         expirationDate = uIntToString.uIntToString(dateUInt)
         
         if not success:
-            #TODO QMessageBox
-            #Delete tmp?
+            self.showMessage("VAIDA verification failed!")
             return
         
         self.ui = Ui_VideoVerificationDialog()

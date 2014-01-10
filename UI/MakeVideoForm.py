@@ -1,4 +1,4 @@
-from PyQt4.QtGui import QDialog, QFileDialog
+from PyQt4.QtGui import QDialog, QFileDialog, QMessageBox
 from MakeVideoFormLayout import Ui_MakeVideoForm
 from gpglib import public_keys_details, create_vaida
 import re
@@ -15,11 +15,21 @@ class MakeVideoForm (QDialog):
 #        self.window.close()
 #        newForm.exec()
 
+    def showMessage(self, text):
+        message = QMessageBox()
+        message.setText(text)
+        message.exec()
 
     def importVideo(self):
         homeDir = expanduser("~")
         fname = str(QFileDialog.getOpenFileName(caption="Import a video", directory=homeDir))
-        create_vaida(fname, self.passphrase, self.keyID)
+        try:
+            vaida_path = create_vaida(fname, self.passphrase, self.keyID)
+        except GPGException as e:
+            self.showMessage(str(e))
+            return
+        self.showMessage("VAIDA created at " + vaida_path)
+        exit()
     
     def extract_name_and_email(self, uid):
         result = re.search('(.*?)<(.*?)>', uid, flags=0)

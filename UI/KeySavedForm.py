@@ -1,4 +1,4 @@
-from PyQt4.QtGui import QDialog
+from PyQt4.QtGui import QDialog, QGraphicsScene, QGraphicsView, QGraphicsPixmapItem, QPixmap
 from KeySavedFormLayout import Ui_keySavedDialog
 
 class KeySavedForm (QDialog):
@@ -15,6 +15,13 @@ class KeySavedForm (QDialog):
         
         # Set up connections
         self.ui.okayButton.clicked.connect(self.okayClicked)
+
+        # Set checkmark image
+        scene = QGraphicsScene()
+       # view = QGraphicsView(scene)
+        item = QGraphicsPixmapItem(QPixmap("checkmark.png"))
+        scene.addItem(item)
+        self.ui.checkMarkGraphicsView.setScene(scene)
         
         self.show()
         

@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'KeySavedFormLayout.ui'
 #
-# Created: Wed Dec 11 19:45:36 2013
+# Created: Wed Jan  8 00:29:53 2014
 #      by: PyQt4 UI code generator 4.10.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -26,19 +26,20 @@ except AttributeError:
 class Ui_keySavedDialog(object):
     def setupUi(self, keySavedDialog):
         keySavedDialog.setObjectName(_fromUtf8("keySavedDialog"))
-        keySavedDialog.resize(315, 304)
+        keySavedDialog.resize(363, 398)
         self.checkMarkGraphicsView = QtGui.QGraphicsView(keySavedDialog)
-        self.checkMarkGraphicsView.setGeometry(QtCore.QRect(30, 10, 256, 192))
+        self.checkMarkGraphicsView.setGeometry(QtCore.QRect(0, 10, 371, 291))
+        self.checkMarkGraphicsView.setViewportUpdateMode(QtGui.QGraphicsView.FullViewportUpdate)
         self.checkMarkGraphicsView.setObjectName(_fromUtf8("checkMarkGraphicsView"))
         self.keyIsLabel = QtGui.QLabel(keySavedDialog)
-        self.keyIsLabel.setGeometry(QtCore.QRect(-20, 210, 341, 41))
+        self.keyIsLabel.setGeometry(QtCore.QRect(0, 300, 341, 41))
         font = QtGui.QFont()
         font.setPointSize(16)
         self.keyIsLabel.setFont(font)
         self.keyIsLabel.setAlignment(QtCore.Qt.AlignCenter)
         self.keyIsLabel.setObjectName(_fromUtf8("keyIsLabel"))
         self.okayButton = QtGui.QPushButton(keySavedDialog)
-        self.okayButton.setGeometry(QtCore.QRect(80, 260, 131, 41))
+        self.okayButton.setGeometry(QtCore.QRect(100, 350, 131, 41))
         font = QtGui.QFont()
         font.setPointSize(14)
         self.okayButton.setFont(font)
