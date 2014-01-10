@@ -35,7 +35,7 @@ class GenerateForm1 (QDialog):
         passphrase = self.ui.passphraseLineEdit.text()
         if len(passphrase) == 0:
             self.showMessage("Please enter a passphrase")
-        if passphrase != self.ui.repeatPassphraseLineEdit.text:
+        if passphrase != self.ui.repeatPassphraseLineEdit.text():
             self.showMessage("Passphrases do not match. Please try again")
         self.showMessage("When this message is dismissed app will hang. Please provide entropy.")
         print ("App will now hang. Please provide entropy.")
