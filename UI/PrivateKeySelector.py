@@ -20,9 +20,6 @@ class PrivateKeySelector (QDialog):
         self.ui = Ui_PrivateKeySelectorDialog()
         self.ui.setupUi(self)
         self.app = app
-
-        #homeDir = expanduser("~")
-        #fname = str(QtGui.QFileDialog.getOpenFileName(caption="Choose a VAIDA file", directory=homeDir))
         
         self.keysDict = private_keys_users()
         if not self.keysDict:
@@ -48,17 +45,11 @@ class PrivateKeySelector (QDialog):
         print (selected)
         keyID = self.keysDict[selected]
         
+        # Test passphrase and handle failure
         if not test_passphrase(keyID, passphrase):
             message = QMessageBox()
             message.setText("Incorrect passphrase")
             message.exec()
             return
         
-        #_user_to_key_dict(self.keysDict)[selected]
-        # print (keyID)
-        
-        # TODO Same UID may give wrong key
         self.startMakeVideo(passphrase, keyID)
-        
-        #self.startMakeVideo(passphrase, keyID)
-        

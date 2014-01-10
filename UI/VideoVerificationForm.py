@@ -1,6 +1,5 @@
 import sys
 from PyQt4.QtGui import QApplication, QDialog, QMessageBox
-#from PyQt4.phonon import MediaSource, VideoWidget
 from PyQt4.phonon import Phonon
 from VideoVerificationFormLayout import *
 from KeySavedForm import *
@@ -71,10 +70,4 @@ class VideoVerificationForm (QDialog) :
         self.ui.checkBox_4.stateChanged.connect(self.checkBoxChecked)
         
         self.show()
-        
-        # Add VideoVerificationForm window to openWindows list
-        #app.openWindows = app.openWindows + [self]
-        
         self.media.play()
-			
-#VAIDAApp(sys.argv)

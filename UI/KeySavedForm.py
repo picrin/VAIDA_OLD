@@ -18,12 +18,8 @@ class KeySavedForm (QDialog):
 
         # Set checkmark image
         scene = QGraphicsScene()
-       # view = QGraphicsView(scene)
         item = QGraphicsPixmapItem(QPixmap("checkmark.png"))
         scene.addItem(item)
         self.ui.checkMarkGraphicsView.setScene(scene)
         
         self.show()
-        
-        # Add GenerateForm1 window to openWindows
-        #app.openWindows = app.openWindows + [self.window]

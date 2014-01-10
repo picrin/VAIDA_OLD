@@ -7,14 +7,6 @@ from os.path import expanduser
 
 class MakeVideoForm (QDialog):
     
-    # def passphraseChanged(self):
-    #    self.ui.passphraseLengthLabel.setText(str(len(self.ui.passphraseTextEdit.toPlainText())))
-    
-#    def loadKeyClicked(self):
-#        newForm = PrivateKeySelector(self.app)
-#        self.window.close()
-#        newForm.exec()
-
     def showMessage(self, text):
         message = QMessageBox()
         message.setText(text)

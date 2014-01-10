@@ -28,7 +28,6 @@ class GenerateForm1 (QDialog):
         realName = self.ui.nameTextEdit.toPlainText()
         if len(realName) == 0:
             self.showMessage("Please enter your name")
-        # TODO Ask for nickname?
         nickname = self.ui.nicknameTextEdit.toPlainText()
         email = self.ui.emailTextEdit.toPlainText()
         if len(email) == 0:
@@ -38,7 +37,6 @@ class GenerateForm1 (QDialog):
             self.showMessage("Please enter a passphrase")
         if passphrase != self.ui.repeatPassphraseLineEdit.text:
             self.showMessage("Passphrases do not match. Please try again")
-        # TODO Loading message. Ask for entropy.
         self.showMessage("When this message is dismissed app will hang. Please provide entropy.")
         print ("App will now hang. Please provide entropy.")
         generate_gpg_key(realName, nickname, email, passphrase) 
@@ -51,8 +49,6 @@ class GenerateForm1 (QDialog):
         super(QDialog, self).__init__()
         self.app = app
         
-        #Set up window
-        #self.window = QDialog()
         self.ui = Ui_GenerateForm1Dialog()
         self.ui.setupUi(self)
         
@@ -62,9 +58,3 @@ class GenerateForm1 (QDialog):
         self.ui.generateKeyButton.clicked.connect(self.generateKeyClicked)
 
         self.show()
-        #self.window.show()
-        
-        # Add GenerateForm1 window to openWindows
-        #app.openWindows = app.openWindows + [self.window]
-
-

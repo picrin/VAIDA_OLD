@@ -6,9 +6,6 @@ from os.path import expanduser
 from VideoVerificationForm import *
 
 class VAIDAApp (QApplication) :
-
-    # List of open windows to keep reference in app
-    #global openWindows
     
     def onCreateButtonClicked(self):
         # Create
@@ -41,12 +38,8 @@ class VAIDAApp (QApplication) :
         self.ui.createButton.clicked.connect(self.onCreateButtonClicked)
         self.ui.verifyButton.clicked.connect(self.onVerifyButtonClicked)
         self.lastWindowClosed.connect(self.closeApp)
-        #self.connect(self, QtCore.SIGNAL("lastWindowClosed()"), self.closeApp)
         
         self.window.show()
-        
-        # Add HomeForm window to openWindows list
-        #self.openWindows = [self.window]
         
         # Start QApplication loop
         sys.exit(self.exec_())
