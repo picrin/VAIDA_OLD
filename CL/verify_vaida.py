@@ -42,7 +42,11 @@ def verify(file_name):
                 print ("Please answer 'yes' or 'no'")
     
     print ("Verified")
-    gpglib.add_tmp_to_keyring()
-    print ("Added to keyring")
+    try:
+        gpglib.add_tmp_to_keyring()
+    except GPGException as e:
+        print (str(e))
+    else:
+        print ("Added to keyring")
 
 #print ("Verify loaded")

@@ -4,6 +4,9 @@ import os
 import tarfile
 from platform import system
 
+class GPGException (Exception):
+    pass
+
 def sanitise_keys(keys):
     sanitised_all = {}
     for key in keys:
@@ -20,36 +23,27 @@ def _user_to_key_dict(private_keys):
     user_key = {}
     print (private_keys)
     for key in private_keys:
-        #print (key)
-        #dict_uids = key['uids']
-        #print dict_uids
-        #dict_key = dict_uids[0]
-        #print dict_key
         user_key[key['uids'][0]] = key['keyid']
     return user_key
 
-
-
-#print sanitise_keys(keys)
-
-# expanduser?
-#true_gpg_path = '''~/.gnupg'
-#tmp_home = ''#'tmpgpg/'
+def create_dir(directory):
+    try:
+        os.makedirs(directory)
+    except FileExistsError:
+        return
 
 current_os = system()
 if current_os == "Windows":
     true_gpg_path = os.path.join(os.environ['APPDATA'], 'gnupg')
     tmp_home = os.path.join(os.environ['APPDATA'], 'tmpgpg')
-    #os.makedirs(tmp_home)
 elif current_os == "Linux":
-    true_gpg_path = os.path.join(os.environ['HOME'], '.gnupg')#os.path.expanduser('.gnupg')
-    tmp_home = os.path.join(os.environ['HOME'], '.tmpgpg')#os.path.expanduser('tmpgpg')
-    #os.makedirs(tmp_home)
+    true_gpg_path = os.path.join(os.environ['HOME'], '.gnupg')
+    tmp_home = os.path.join(os.environ['HOME'], '.tmpgpg')
 else:
-    # TODO Confirm
+    # TODO Confirm for other
     true_gpg_path = os.path.expanduser('~/.gnupg')
     tmp_home = os.path.expanduser('tmpgpg/')
-    #os.makedirs(tmp_home)
+create_dir(tmp_home)
 
 def generate_gpg_key(real_name, nickname, email, passphrase, key_length = 2048, key_type = "RSA", expire_date = "1y"):
     gpg = gnupg.GPG(gnupghome = true_gpg_path)
@@ -85,11 +79,10 @@ def _sign_video(video_filepath, passphrase, keyid):
     gpg = gnupg.GPG(gnupghome = true_gpg_path)
     with open(video_filepath, "rb") as stream:
         signed = gpg.sign_file(stream, keyid = keyid, passphrase = passphrase, detach = True)
-    print (dir(signed))
-    print (signed.stderr)
-    if signed.stderr:
-        # Failed
-        pass
+    #print (dir(signed))
+    #print (signed.stderr)
+    if not "SIG_CREATED" in signed.stderr:
+        raise GPGException("Video signing failed")
     signature_path = video_filepath + ".signature"
     with open(signature_path, "wb") as video_signature:
         video_signature.write(signed.data)
@@ -100,7 +93,6 @@ def _sign_video(video_filepath, passphrase, keyid):
     #result_file.close()
 
 def create_vaida(video_filepath, passphrase, keyid):
-    #TODO slashes -> windows (throughout)
     signature_path = _sign_video(video_filepath, passphrase, keyid)
     vaida_path = video_filepath + ".vaida"
     with tarfile.open(name=vaida_path, mode='w', fileobj=None, bufsize=10240) as tar:
@@ -123,8 +115,8 @@ def untar_verify_vaida(vaida_path):
             imported = gpg.import_keys(pubkey.read())
         print (dir(imported))
         verification = gpg.verify_file(open(os.path.join(tmp_home, tar.getnames()[2]), "rb"), os.path.join(tmp_home, tar.getnames()[0]))
-        print (verification.valid)
-        print (verification.stderr)
+        #print (verification.valid)
+        #print (verification.stderr)
         #print dir(verification)
         
         dicto = tmp_public_keys_details()
@@ -141,9 +133,12 @@ def add_tmp_to_keyring():
     gpg = gnupg.GPG(gnupghome = true_gpg_path)
     with open(os.path.join(tmp_home, "pubkey"), "rb") as pubkey:
         trusted = gpg.import_keys(pubkey.read())
-    print (dir(trusted))
-    print (trusted.stderr)
-    _clear_temp()
+    #print (dir(trusted))
+    #print (trusted.stderr)
+    if "IMPORT_OK" in trusted.stderr:
+        _clear_temp()
+    else:
+        raise GPGException("Adding key to keyring failed")
 
 #create_vaida("/home/picrin/programming/VAIDA/Honey_Sample_G.avi", "dirty loondry boundry. stash/", u"D98029C596F20E5D")
 #print verify_vaida("/home/picrin/programming/VAIDA/backend/Honey_Sample_G.avi.vaida.tar")
