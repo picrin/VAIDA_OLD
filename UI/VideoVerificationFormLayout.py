@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'VideoVerificationFormLayout.ui'
 #
-# Created: Wed Jan  8 00:29:53 2014
+# Created: Fri Jan 10 17:33:07 2014
 #      by: PyQt4 UI code generator 4.10.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -26,7 +26,7 @@ except AttributeError:
 class Ui_VideoVerificationDialog(object):
     def setupUi(self, VideoVerificationDialog):
         VideoVerificationDialog.setObjectName(_fromUtf8("VideoVerificationDialog"))
-        VideoVerificationDialog.resize(895, 499)
+        VideoVerificationDialog.resize(1172, 499)
         self.videoPlayerWidget = QtGui.QWidget(VideoVerificationDialog)
         self.videoPlayerWidget.setGeometry(QtCore.QRect(20, 10, 491, 431))
         self.videoPlayerWidget.setObjectName(_fromUtf8("videoPlayerWidget"))
@@ -40,7 +40,7 @@ class Ui_VideoVerificationDialog(object):
         self.fingerprintLabel.setFont(font)
         self.fingerprintLabel.setObjectName(_fromUtf8("fingerprintLabel"))
         self.keyExpirationLabel = QtGui.QLabel(VideoVerificationDialog)
-        self.keyExpirationLabel.setGeometry(QtCore.QRect(560, 450, 301, 31))
+        self.keyExpirationLabel.setGeometry(QtCore.QRect(560, 450, 591, 31))
         font = QtGui.QFont()
         font.setPointSize(14)
         font.setBold(True)
@@ -49,7 +49,7 @@ class Ui_VideoVerificationDialog(object):
         self.keyExpirationLabel.setFont(font)
         self.keyExpirationLabel.setObjectName(_fromUtf8("keyExpirationLabel"))
         self.layoutWidget = QtGui.QWidget(VideoVerificationDialog)
-        self.layoutWidget.setGeometry(QtCore.QRect(530, 0, 351, 441))
+        self.layoutWidget.setGeometry(QtCore.QRect(530, 0, 621, 441))
         self.layoutWidget.setObjectName(_fromUtf8("layoutWidget"))
         self.verticalLayout = QtGui.QVBoxLayout(self.layoutWidget)
         self.verticalLayout.setContentsMargins(-1, 0, -1, 0)
