@@ -1,8 +1,9 @@
-from PyQt4.QtGui import QDialog, QFileDialog, QMessageBox
-from PrivateKeySelectorDialog import Ui_PrivateKeySelectorDialog
-from gpglib import private_keys_users, true_gpg_path, test_passphrase
-from MakeVideoForm import MakeVideoForm
-from os.path import expanduser
+import sys
+from PyQt4.QtGui import QApplication, QDialog
+from PrivateKeySelectorDialog import *
+from PyQt4.QtGui import QListWidgetItem
+from gpglib import *
+from MakeVideoForm import *
 
 def showPrivateKeySelector(app):
     PrivateKeySelector(app)
@@ -11,54 +12,31 @@ class PrivateKeySelector (QDialog):
     
     def startMakeVideo(self, passphrase, keyID):
         form = MakeVideoForm(self.app, passphrase, keyID)
-        self.close()
-        form.exec()
+        self.window.close()
+        form._exec()
     
     def __init__(self, app):
         #Set up window
-        super(QDialog, self).__init__()
+        self.window = QDialog()
         self.ui = Ui_PrivateKeySelectorDialog()
-        self.ui.setupUi(self)
-        self.app = app
-
-        #homeDir = expanduser("~")
-        #fname = str(QtGui.QFileDialog.getOpenFileName(caption="Choose a VAIDA file", directory=homeDir))
+        self.ui.setupUi(self.window)
         
-        self.keysDict = private_keys_users()
-        if not self.keysDict:
-            # Didn't find any keys so ask for their location
-            homeDir = expanduser("~")
-            keysLocation = str(QFileDialog.getOpenFileName(caption="Choose your private keys location", directory=homeDir))
-            true_gpg_path = keysLocation
-            self.keysDict = private_keys_users()
+        keysDict = private_keys_users()
         
-        for key in self.keysDict.keys():
+        for key in keysDict.keys():
+            #item = QListWidgetItem(key)
+            #self.ui.keyListWidget.insertItem(item)
             self.ui.keyListWidget.addItem(key)
+        
+        #self.ui.privateKeyList = private_keys_users().keys()
         
         self.ui.selectKeyButton.clicked.connect(self.selectKey)
         
-        self.show()
+        self.window.show()
         
     def selectKey(self):
         # TODO rename "lineEdit" to something descriptive
         passphrase = self.ui.lineEdit.text()
-        
-        # Get keyID from list
-        selected = self.ui.keyListWidget.selectedItems()[0].text()
-        print (selected)
-        keyID = self.keysDict[selected]
-        
-        if not test_passphrase(keyID, passphrase):
-            message = QMessageBox()
-            message.setText("Incorrect passphrase")
-            message.exec()
-            return
-        
-        #_user_to_key_dict(self.keysDict)[selected]
-        # print (keyID)
-        
-        # TODO Same UID may give wrong key
+        keyID = "123"
         self.startMakeVideo(passphrase, keyID)
-        
-        #self.startMakeVideo(passphrase, keyID)
         
