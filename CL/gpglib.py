@@ -103,6 +103,11 @@ def create_vaida(video_filepath, passphrase, keyid):
         tar.add(video_filepath, arcname = "video")
         tar.add("pubkey", arcname = "pubkey")
         tar.add(signature_path, arcname = "signature")
+
+    # Remove signature and pubkey
+    os.remove("pubkey")
+    os.remove(signature_path)
+
     return vaida_path
 
 def untar_verify_vaida(vaida_path):
@@ -127,6 +132,8 @@ def untar_verify_vaida(vaida_path):
 
 def _clear_temp():
     if os.path.isdir(tmp_home):
+        for fname in os.listdir(tmp_home):
+            os.remove(os.path.join(tmp_home, fname))
         shutil.rmtree(tmp_home)
 
 def add_tmp_to_keyring():
@@ -139,14 +146,3 @@ def add_tmp_to_keyring():
         _clear_temp()
     else:
         raise GPGException("Adding key to keyring failed")
-
-#create_vaida("/home/picrin/programming/VAIDA/Honey_Sample_G.avi", "dirty loondry boundry. stash/", u"D98029C596F20E5D")
-#print verify_vaida("/home/picrin/programming/VAIDA/backend/Honey_Sample_G.avi.vaida.tar")
-#add_pub_keyring()
-#print public_keys_details()
-#print private_keys_details()
-#generate_gpg_key("Hugh McGrade (do not trust)", "hmg (do not trust)", "hugh@mcgrade.ac.uk (do not trust)", "dirty loondry boundry. stash/")
-#create_vaida("/home/hugh/Documents/VAIDA/UI/video004.mp4", "dirty loondry boundry. stash/", u"62CDD87039635942")
-#untar_verify_vaida("video004.mp4.vaida")
-#print public_keys_details()
-#print private_keys_details()
